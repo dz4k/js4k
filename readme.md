@@ -6,4 +6,4 @@
 
 **soiree**, a credit-card-sized htmx-like
 
-all together <5kB raw, <2.6kB minified, <1.4kB minified and gzipped.
+all together <4.5kiB raw, <2kiB minified, <1.1kiB minified and gzipped.
