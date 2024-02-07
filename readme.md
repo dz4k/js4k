@@ -13,13 +13,13 @@ wc --bytes dist/*
  2840 dist/croc.js
  1265 dist/croc.min.js
   586 dist/croc.min.js.br
- 4635 dist/js4k.js
- 2015 dist/js4k.min.js
-  943 dist/js4k.min.js.br
+ 4663 dist/js4k.js
+ 2036 dist/js4k.min.js
+  953 dist/js4k.min.js.br
  1031 dist/onwhatever.js
   483 dist/onwhatever.min.js
   317 dist/onwhatever.min.js.br
-  977 dist/soiree.js
-  502 dist/soiree.min.js
-  267 dist/soiree.min.js.br
+ 1012 dist/soiree.js
+  523 dist/soiree.min.js
+  283 dist/soiree.min.js.br
 ~~~~
