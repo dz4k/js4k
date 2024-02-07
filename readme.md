@@ -6,4 +6,20 @@
 
 **soiree**, a credit-card-sized htmx-like
 
-all together <4.5kiB raw, <2kiB minified, <1.1kiB minified and gzipped.
+all together <4.5kiB raw, <2kiB minified, <1kiB minified and brotlied.
+
+~~~~
+wc --bytes dist/*
+ 2840 dist/croc.js
+ 1265 dist/croc.min.js
+  586 dist/croc.min.js.br
+ 4635 dist/js4k.js
+ 2015 dist/js4k.min.js
+  943 dist/js4k.min.js.br
+ 1031 dist/onwhatever.js
+  483 dist/onwhatever.min.js
+  317 dist/onwhatever.min.js.br
+  977 dist/soiree.js
+  502 dist/soiree.min.js
+  267 dist/soiree.min.js.br
+~~~~
