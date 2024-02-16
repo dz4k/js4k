@@ -1,4 +1,4 @@
-# js4k: tiny javascript libraries for hypertext applications
+# js4k: three tiny javascript libraries for hypertext applications
 
 **croc**, a tightly packed collection of DOM utilities
 
