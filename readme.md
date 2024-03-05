@@ -6,6 +6,8 @@
 
 **soiree**, a credit-card-sized htmx-like
 
+**instyle**, superpowers for inline styles
+
 ~~~~
 du -bh $(ALL)
 4.6K    dist/js4k.js
