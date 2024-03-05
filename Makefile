@@ -21,7 +21,7 @@ dist/%.min.js.br: dist/%.min.js
 	brotli -f $^ > $@
 
 .EXTRA_PREREQS = dist
-dist/js4k.js: lib/croc.js lib/onwhatever-croc.js lib/soiree-croc.js
+dist/js4k.js: lib/croc.js lib/onwhatever-croc.js lib/soiree.js
 $(COMPONENTS): dist/%.js: lib/%.js
 
 .PHONY: all metrics clean
