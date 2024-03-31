@@ -409,8 +409,8 @@ describe('croc', () => {
 
     it('gets the next element matching a selector without wrapping', () => {
       sandbox.innerHTML = html`
-        <div></div>
         <div class=foo></div>
+        <div></div>
       `
       const [a, b] = sandbox.children
       should.not.exist(next('.foo', { from: a, wrap: false }))
@@ -451,8 +451,8 @@ describe('croc', () => {
 
     it('gets the previous element matching a selector without wrapping', () => {
       sandbox.innerHTML = html`
-        <div class=foo></div>
         <div></div>
+        <div class=foo></div>
       `
       const [a, b] = sandbox.children
       should.not.exist(prev('.foo', { from: b, wrap: false }))
