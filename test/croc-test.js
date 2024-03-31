@@ -417,7 +417,7 @@ describe('croc', () => {
     })
 
     it('returns null if no elements match', () => {
-      should.not.exist(next('.foo'))
+      should.not.exist(next('.foo', { from: sandbox }))
     })
   })
 
@@ -459,7 +459,7 @@ describe('croc', () => {
     })
 
     it('returns null if no elements match', () => {
-      should.not.exist(prev('.foo'))
+      should.not.exist(prev('.foo', { from: sandbox }))
     })
   })
 })
