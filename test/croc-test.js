@@ -1,3 +1,5 @@
+import { $, $$, $x, $$x, on, dispatch, htmlEscape, htmlTrust, html, h, css, next, prev } from "/lib/croc.js"
+
 describe('croc', () => {
   describe('$', () => {
     it('finds simple tags', () => {
@@ -270,8 +272,8 @@ describe('croc', () => {
 
     it('can cope with non-string input', () => {
       htmlEscape(42).should.equal('42')
-      htmlEscape(null).should.equal('null')
-      htmlEscape(undefined).should.equal('undefined')
+      htmlEscape(null).should.equal('')
+      htmlEscape(undefined).should.equal('')
       htmlEscape({}).should.equal('[object Object]')
       htmlEscape([]).should.equal('')
       const customStringify = { toString() { return '42' } }
@@ -301,31 +303,33 @@ describe('croc', () => {
         '<div><script src=\'invasive-analytics.js\'></script></div>')
     })
 
-    it('marks strings as trusted HTML when used as plain function', () => {
-      const trusted = html('<div>')
-      trusted.toString().should.equal('<div>')
-      const interpolated = html`<section>${trusted}</section>`
-      interpolated.should.equal('<section><div></section>')
-    })
-
-    it('can cope with non-string input', () => {
-      html(42).should.equal('42')
-      html(null).should.equal('null')
-      html(undefined).should.equal('undefined')
-      html({}).should.equal('[object Object]')
-      html([]).should.equal('')
-      const customStringify = { toString() { return '42' } }
-      html(customStringify).should.equal('42')
-    })
-
     it('can cope with non-string input in interpolations', () => {
       html`${42}`.should.equal('42')
-      html`${null}`.should.equal('null')
-      html`${undefined}`.should.equal('undefined')
+      html`${null}`.should.equal('')
+      html`${undefined}`.should.equal('')
       html`${{}}`.should.equal('[object Object]')
       html`${[]}`.should.equal('')
       const customStringify = { toString() { return '42' } }
       html`${customStringify}`.should.equal('42')
+    })
+  })
+  
+  describe("htmlTrust", () => {
+    it('marks strings as trusted HTML', () => {
+      const trusted = htmlTrust('<div>')
+      trusted.toString().should.equal('<div>')
+      const interpolated = html`<section>${trusted}</section>`
+      interpolated.should.equal('<section><div></section>')
+    })
+    
+    it('can cope with non-string input', () => {
+      htmlTrust(42).toString().should.equal('42')
+      htmlTrust(null).toString().should.equal('')
+      htmlTrust(undefined).toString().should.equal('')
+      htmlTrust({}).toString().should.equal('[object Object]')
+      htmlTrust([]).toString().should.equal('')
+      const customStringify = { toString() { return '42' } }
+      htmlTrust(customStringify).toString().should.equal('42')
     })
   })
 
