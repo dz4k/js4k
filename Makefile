@@ -1,11 +1,12 @@
+ESBUILD_ARGS := --target=esnext --format=esm
 
 COMPONENTS := dist/croc.js dist/onwhatever.js dist/soiree.js dist/instyle.js dist/murph.js
 LIBRARIES := dist/js4k.js $(COMPONENTS)
-ALL := $(foreach l,$(LIBRARIES),$(l) $(l:.js=.min.js) $(l:.js=.min.js.br))
+ALL := $(foreach l,$(LIBRARIES),$(l) $(l:.js=.min.js) $(l:.js=.bundle.js) $(l:.js=.bundle.min.js) $(l:.js=.min.js.br) $(l:.js=.bundle.min.js.br))
 
 all:     $(ALL)
 metrics: $(ALL)
-	du -bh $^
+	du -b $^
 clean:
 	rm -rf dist
 test:
@@ -18,17 +19,25 @@ test:
 
 dist:
 	mkdir -p $@
-dist/%.min.js:    dist/%.js
-	esbuild $^ --minify --bundle --target=esnext --outfile=$@
-dist/%.min.js.br: dist/%.min.js
-	brotli -f $^ > $@
 
 .EXTRA_PREREQS = dist
-dist/js4k.js: lib/croc.js lib/onwhatever-croc.js lib/soiree.js lib/instyle.js lib/murph.js
+dist/js4k.js: $(COMPONENTS:dist=lib)
 	echo '$(foreach l,$^,export * from "./$(l)";)' \
-	| esbuild --bundle --target=esnext --format=esm --outfile=$@
+	| esbuild $(ESBUILD_ARGS) --bundle --outfile=$@
 
 $(COMPONENTS): dist/%.js: lib/%.js
-	cat $^ > $@
+	cp $^ $@
+
+dist/%.bundle.js: lib/%.js
+	esbuild $(ESBUILD_ARGS) --bundle --outfile=$@ $^
+
+dist/%.min.js:            dist/%.js
+	esbuild $(ESBUILD_ARGS) --minify --outfile=$@ $^
+
+dist/%.min.js.br:         dist/%.min.js
+	brotli -f $^ > $@
+
+dist/js4k.bundle.js: dist/js4k.js
+	cp $^ $@
 
 .PHONY: all metrics clean test
